@@ -1,0 +1,4 @@
+RECURSION
+
+- Recursion is a function that calls itself
+- It is different from a for loop

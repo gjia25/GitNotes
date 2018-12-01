@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>GitNotes</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+    box-sizing: border-box;
+}
+/* Style the body */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+/* Header/logo Title */
+.header {
+    padding: 20px;
+    text-align: center;
+    background: #EC7063;
+    color: white;
+}
+/* Increase the font size of the heading */
+.header h1 {
+    font-size: 40px;
+}
+/* Style the top navigation bar */
+ul#navbar {
+    overflow: hidden;
+    background-color: #99A3A4;
+    margin:0;
+}
+/* Style the navigation bar links */
+ul#navbar li {
+    float: right;
+    display: inline;
+    color: white;
+    text-align: center;
+    padding:15px 10px;
+    text-decoration: none;
+}
+
+ul#navleft li {
+    float:left;
+    display: block;
+    margin-right:20px;
+}
+
+a {
+    color: #d14f4b;
+    text-decoration: none;
+}
+a:hover {
+    color: #6dcbb7;
+}
+/* Column container */
+.row {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+}
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+    -ms-flex: 10%; /* IE10 */
+    flex: 10%;
+    background-color: #f1f1f1;
+    padding: 20px;
+}
+
+/* Main column */
+.main {
+    -ms-flex: 70%; /* IE10 */
+    flex: 70%;
+    background-color: white;
+    padding: 20px 50px;
+}
+/* Content of notes */
+.txt {
+    padding: 10px 20px;
+}
+/* Footer */
+.footer {
+    padding: 20px;
+    text-align: center;
+    background: #ddd;
+}
+
+.flash {
+    text-align: center;
+    color: red;
+}
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+    .row {
+        flex-direction: column;
+    }
+}
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+    .navbar a {
+        float: none;
+        width: 100%;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>GitNotes</h1>
+  <p>Crowdsourced notes for Cornell Courses</p>
+</div>
+
+<ul id="navbar">
+    <ul id="navleft">
+        <li><a href="{{index}}">Home</a></li>
+        <li><a href="{{browse}}">Browse</a></li>
+    </ul>
+
+    {% if user %}
+    <li style="margin-right:10px;"><a href="{{signout}}">Sign Out</a></li>
+    <li>Welcome, <a href="{{account}}">{{ user }}</a>!</li>
+    {% else %}
+    <li><a href="{{login}}">Sign In</a></li>
+    {% endif %}
+</ul>
+
+<div class="row">
+
+  <div class="main">
+      <a href="{{ href }}"> <h3><< Go Back</h3> </a>
+      <h2 style="text-align:center;">Upload edits to notes:</h2>
+      <h3 style="text-align:center;">{{ courseid }} | {{ noteid }}</h3>
+      <form method=post enctype=multipart/form-data style="text-align:center">
+        <input type=file name=file>
+        <p>Title:<br/> <input type="text" name=editname></p>
+        Changes made:<br/><textarea name="comment" cols="40" rows="5"></textarea>
+        <p><input type=submit value=Upload></p>
+      </form>
+      <div class="flash">
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              {% for message in messages %}
+                {{ message }}
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+      </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p style="text-align:left;">BigRed//Hacks 2018</p>
+</div>
+
+</body>
+</html>

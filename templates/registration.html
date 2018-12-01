@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;
+margin: 0;
+}
+form {border: 3px solid #f1f1f1;}
+.header {
+    padding: 20px;
+    text-align: center;
+    background: #EC7063;
+    color: white;
+}
+.header h1 {
+    font-size: 40px;
+}
+
+ul#navbar {
+    overflow: hidden;
+    background-color: #99A3A4;
+    margin:0;
+}
+/* Style the navigation bar links */
+ul#navbar li {
+    float: right;
+    display: inline;
+    color: white;
+    text-align: center;
+    padding:15px 10px;
+    text-decoration: none;
+}
+
+ul#navleft li {
+    float:left;
+    display: block;
+    margin-right:20px;
+}
+
+a {
+    color: #d14f4b;
+    text-decoration: none;
+}
+a:hover {
+    color: #6dcbb7;
+}
+
+.flash {
+    align:center;
+    color:red;
+}
+
+.main {
+    -ms-flex: 70%;
+    flex: 70%;
+    background-color: white;
+    padding: 15px;
+    text-align: center;
+}
+input[type=text], input[type=password] {
+    width: 35%;
+    padding: 15px 5px;
+    margin: 50px 0;
+    display: inline-block;
+    border: .5px solid #F1948A;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+}
+.container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+button {
+    background-color: #EC7063;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 15%;
+}
+button:hover {
+    opacity: 0.8;
+    background-color:#F1948A;
+}
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+.container {
+    padding: 25px;
+    text-align: center;
+}
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+</style>
+</head>
+<body>
+
+    <div class="header">
+      <h1>GitNotes</h1>
+      <p>Crowdsourced notes for Cornell Courses</p>
+    </div>
+
+    <ul id="navbar">
+        <ul id="navleft">
+            <li><a href="{{index}}">Home</a></li>
+            <li><a href="{{browse}}">Browse</a></li>
+        </ul>
+      {% if user %}
+      <li style="margin-right:10px;"><a href="{{signout}}">Sign Out</a></li>
+      <li>Welcome, <a href="{{account}}">{{ user }}</a>!</li>
+      {% else %}
+      <li><a href="{{login}}">Sign In</a></li>
+      {% endif %}
+    </ul>
+
+<center><h2>Registration</h2></center>
+
+<form method=post enctype=multipart/form-data>
+
+  <div class="container">
+    <label for="uname"><b><p>Username</p></b></label>
+    <input type="text" placeholder="Username" name="username">
+
+    <label for="psw"><b><br>Password<br></b></label>
+    <input type="password" placeholder="Password" name="password">
+
+
+    <label for="email"><b><p>Email Address</p></b></label>
+    <input type="text" placeholder="Email Address" name="email address">
+
+    <br>
+    <button type="submit">Submit</button>
+    <br>
+    <div class="flash">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            {{ message }}
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </div>
+  </div>
+
+  <div class="container" style="background-color:#ddd">
+    <p style="text-align:left;">BigRed//Hacks 2018</p>
+
+  </div>
+</form>
+
+</body>
+</html>
